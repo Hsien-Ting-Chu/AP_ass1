@@ -1,5 +1,5 @@
 package M2;
-
+//Class Author : Haifan Wang
 public class SuperAthlete extends Athletes {
 	// Constructor
 	public SuperAthlete(String ID, String name, int age, String state) {
