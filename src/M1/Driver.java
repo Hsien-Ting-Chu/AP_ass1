@@ -1,21 +1,11 @@
-package M1; // Class Author : Chris
-
+package M1; 
+// Class Author : Hsienting Chu
 import java.util.*;
 
 public class Driver {
 	static Scanner sc = new Scanner(System.in);
 	boolean end = false;
-	
-	
-	
-	
-	
-	public static void main(String[] args) {
 
-		Driver driver = new Driver();
-		driver.selection();
-		driver.runGame();
-	}
 // Create a menu list 
 	public void menu() {   
 		System.out.println("Ozlympic Game");
@@ -37,7 +27,6 @@ public class Driver {
 		System.out.println("3. Running");
 		System.out.println("4. Previous menu");
 	}
-
 	
 //	public void menu_selection2(){
 //		for (int i<0 ; i<x.length ;i++){
@@ -45,9 +34,7 @@ public class Driver {
 //		}
 //	}
 	
-	
-	
-	
+
 	public int selection() {
 		int selection = 0;
 		boolean validInput = false;
