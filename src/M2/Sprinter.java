@@ -2,7 +2,7 @@
 //Class Author : Haifan Wang 
 import java.util.Random;
 
-public class Sprinter extends Athletes {
+public class Sprinter extends Athlete {
 	// Constructor
 	public Sprinter(String ID, int age, String name, String state) {
 		super(ID, age, name, state);

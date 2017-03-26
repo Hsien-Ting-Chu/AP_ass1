@@ -2,7 +2,7 @@ package M2;
 
 import java.util.Random;
 
-public class Swimmer extends Athletes {
+public class Swimmer extends Athlete {
 	// Constructor
 	public Swimmer(String ID, int age, String name, String state) {
 		super(ID, age, name, state);

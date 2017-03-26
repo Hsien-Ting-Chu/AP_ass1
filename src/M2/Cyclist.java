@@ -2,7 +2,7 @@ package M2;
 //Class Author : Haifan Wang 
 import java.util.Random;
 
-public class Cyclist extends Athletes implements ICompetable {
+public class Cyclist extends Athlete implements ICompetable {
 	// Constructor
 	public Cyclist(String ID, int age, String name, String state) {
 		super(ID, age, name, state);
