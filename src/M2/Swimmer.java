@@ -4,15 +4,15 @@ import java.util.Random;
 
 public class Swimmer extends Athletes {
 	// Constructor
-	public Swimmer(String ID, String name, int age, String state) {
-		super();
+	public Swimmer(String ID, int age, String name, String state) {
+		super(ID, age, name, state);
 	}
-	//implement compete
-	public int compete(int result) {
-		Random r = new Random();
-		result = r.nextInt(11) + 10;
 
-		return result;
+	// implement compete
+	public int compete(int seconds) {
+		Random r = new Random();
+		seconds = r.nextInt(101) + 100;
+		return seconds;
 	}
 
 }

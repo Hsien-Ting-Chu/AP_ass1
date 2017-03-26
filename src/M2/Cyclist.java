@@ -1,18 +1,23 @@
 package M2;
-
+//Class Author : Haifan Wang 
 import java.util.Random;
 
-public class Cyclist extends Athletes {
+public class Cyclist extends Athletes implements ICompetable {
 	// Constructor
-	public Cyclist(String ID, String name, int age, String state) {
-		super();
+	public Cyclist(String ID, int age, String name, String state) {
+		super(ID, age, name, state);
 	}
-	//implement compete
-	public int compete(int result) {
-		Random r = new Random();
-		result = r.nextInt(301) + 500;
+	
+	//Define range 500~800
+	final int range = 301; 
+	final int start = 500;
 
-		return result;
+	// implement compete
+	public int compete(int seconds) {
+		
+		Random r = new Random();
+		seconds = r.nextInt(range) + start;
+		return seconds;
 	}
 
 }
