@@ -2,11 +2,10 @@ package M2;
 
 import java.util.Random;
 
-<<<<<<< HEAD
-public class Swimmer extends Athlete {
-=======
-public class Swimmer extends Athletes implements ICompetable {
->>>>>>> origin/master
+
+
+public class Swimmer extends Athlete implements ICompetable {
+
 	// Constructor
 	public Swimmer(String ID, int age, String name, String state) {
 		super(ID, age, name, state);

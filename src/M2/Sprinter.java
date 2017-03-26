@@ -2,11 +2,10 @@
 //Class Author : Haifan Wang 
 import java.util.Random;
 
-<<<<<<< HEAD
-public class Sprinter extends Athlete {
-=======
-public class Sprinter extends Athletes implements ICompetable{
->>>>>>> origin/master
+
+
+public class Sprinter extends Athlete implements ICompetable{
+
 	// Constructor
 	public Sprinter(String ID, int age, String name, String state) {
 		super(ID, age, name, state);
