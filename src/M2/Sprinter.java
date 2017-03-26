@@ -2,13 +2,13 @@
 //Class Author : Haifan Wang 
 import java.util.Random;
 
-public class Sprinter extends Athletes {
+public class Sprinter extends Athletes implements ICompetable{
 	// Constructor
 	public Sprinter(String ID, int age, String name, String state) {
 		super(ID, age, name, state);
 	}
 	
-	//Define range 100~200
+	//Define range 10~20
 		final int range = 11;
 		final int start = 10;
 		
