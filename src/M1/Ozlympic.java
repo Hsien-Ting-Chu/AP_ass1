@@ -1,4 +1,5 @@
 package M1;
+
 // Class Author : Hsienting Chu
 public class Ozlympic {
 

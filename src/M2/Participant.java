@@ -1,5 +1,4 @@
 package M2;
-
 //Class Author : Haifan Wang 
 public abstract class Participant {
 	private String ID;

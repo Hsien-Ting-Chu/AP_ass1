@@ -1,9 +1,6 @@
 	package M2;
 //Class Author : Haifan Wang 
 import java.util.Random;
-
-
-
 public class Sprinter extends Athlete implements ICompetable{
 
 	// Constructor
@@ -16,7 +13,8 @@ public class Sprinter extends Athlete implements ICompetable{
 		final int start = 10;
 		
 	// implement compete
-	public int compete(int seconds) {
+	public int compete() {
+		int seconds;
 		Random r = new Random();
 		seconds = r.nextInt(range) + start;
 		return seconds;
