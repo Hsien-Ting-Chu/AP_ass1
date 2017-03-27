@@ -1,10 +1,14 @@
 package M1;
 
-// Class Author : Hsienting Chu
+// @Author : Hsienting Chu
 import java.util.*;
 import M2.*;
 
 public class Driver {
+	//Define all the Game type
+	public static final String TYPE_SWIM = "swim";
+	public static final String TYPE_RUN = "run";
+	public static final String TYPE_CYCLE = "cycle";
 	static Scanner sc = new Scanner(System.in);
 
 	// Define all option's range
@@ -16,11 +20,17 @@ public class Driver {
 	final int athletes_num_range = 8;
 	boolean end = false;
 
-	// Create 10 participants in each type respectively, and put them all in a
-	// same ArryaList
+	ArrayList<Athlete> athleteslist; 
+	ArrayList<Official> officialList;
+	ArrayList<Game> historyGames = new ArrayList<>();
+	
+	/* 1. Create 10 athletes in each type respectively, 
+	 and put them all in a the same ArryaList.
+	   2. Create 10 official 
+	*/
 	public void initialisation() {
 
-		ArrayList<Athlete> athleteslist = new ArrayList<>();
+		athleteslist = new ArrayList<>();
 		athleteslist.add(new Cyclist("AC01", 20, "Connor", "VIC"));
 		athleteslist.add(new Cyclist("AC02", 25, "Noah", "TAS"));
 		athleteslist.add(new Cyclist("AC03", 23, "Ebony", "QLD"));
@@ -65,17 +75,17 @@ public class Driver {
 		athleteslist.add(new SuperAthlete("AA09", 25, "Logan", "WA"));
 		athleteslist.add(new SuperAthlete("AA10", 24, "Husdon", "TAS"));
 
-		Official[] official = new Official[10];
-		official[0] = new Official("OF01", 30, "Jordan", "NSW");
-		official[1] = new Official("OF02", 35, "Andrew", "QLD");
-		official[2] = new Official("OF03", 41, "Jacob", "VIC");
-		official[3] = new Official("OF04", 36, "Hayley", "WA");
-		official[4] = new Official("OF05", 29, "Olivia", "NSW");
-		official[5] = new Official("OF06", 34, "Chris", "QLD");
-		official[6] = new Official("OF07", 48, "Max", "SA");
-		official[7] = new Official("OF08", 51, "Dan", "WA");
-		official[8] = new Official("OF09", 53, "Jasper", "VIC");
-		official[9] = new Official("OF10", 43, "Amber", "NSW");
+		officialList = new ArrayList<>();
+		officialList.add(new Official("OF01", 30, "Jordan", "NSW"));
+		officialList.add(new Official("OF02", 35, "Andrew", "QLD"));
+		officialList.add(new Official("OF03", 41, "Jacob", "VIC"));
+		officialList.add(new Official("OF04", 36, "Hayley", "WA"));
+		officialList.add(new Official("OF05", 29, "Olivia", "NSW"));
+		officialList.add(new Official("OF06", 34, "Chris", "QLD"));
+		officialList.add(new Official("OF07", 48, "Max", "SA"));
+		officialList.add(new Official("OF08", 51, "Dan", "WA"));
+		officialList.add(new Official("OF09", 53, "Jasper", "VIC"));
+		officialList.add(new Official("OF10", 43, "Amber", "NSW"));
 	}
 
 	// printout a main menu
@@ -140,26 +150,26 @@ public class Driver {
 	}
 
 	private void setGame() {
-		int chooseGame = chooseGame();
-		String gameID;
-		int gameNum = 0;
-		switch (chooseGame) {
-		case 1:
-			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
-			Swimming swimming = new Swimming(gameID);
-			gameNum++;
-			break;
-		case 2:
-			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
-			Cycling cycling = new Cycling(gameID);
-			gameNum++;
-			break;
-		case 3:
-			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
-			Running running = new Running(gameID);
-			gameNum++;
-			break;
-		}
+//		int chooseGame = chooseGame();
+//		String gameID;
+//		int gameNum = 0;
+//		switch (chooseGame) {
+//		case 1:
+//			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
+//			Swimming swimming = new Swimming(gameID);
+//			gameNum++;
+//			break;
+//		case 2:
+//			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
+//			Cycling cycling = new Cycling(gameID);
+//			gameNum++;
+//			break;
+//		case 3:
+//			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
+//			Running running = new Running(gameID);
+//			gameNum++;
+//			break;
+//		}
 	}
 
 	private void chooseAthletes() {

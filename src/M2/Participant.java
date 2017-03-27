@@ -30,6 +30,8 @@ public abstract class Participant {
 		return state;
 	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "ID:" + ID + ", age:" + age + ", name:" + name + ", state:" + state;
+	}
 }

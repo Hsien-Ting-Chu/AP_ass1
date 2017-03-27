@@ -1,5 +1,6 @@
 package M2;
 
+import M1.Driver;
 public class SuperAthlete extends Athlete {
 	// Constructor
 	//三個分身
@@ -23,21 +24,15 @@ public class SuperAthlete extends Athlete {
 	@Override
 	public ICompetable getCompeter(String gameType) {
 		switch (gameType) {
-		case "run":
+		case Driver.TYPE_RUN:
 			return sprinter;
-		case "swim":
+		case Driver.TYPE_SWIM:
 			return swimmer;
-		case "cycle":
+		case Driver.TYPE_CYCLE:
 			return cyclist;
 		}
-		return null;
-	}
-
-	//三個分身分數的總合
-	@Override
-	public int getPoints() {
-		return cyclist.getPoints() + sprinter.getPoints() + swimmer.getPoints();
-	}
-
-	
+		throw new RuntimeException("錯誤的gameType");
+	}		
 }
+	//三個分身分數的總合
+
