@@ -1,4 +1,5 @@
 package M2;
+
 //Class Author : Haifan Wang 
 public abstract class Participant {
 	private String ID;
@@ -6,6 +7,7 @@ public abstract class Participant {
 	private String name;
 	private String state;
 
+	// Constructor
 	public Participant(String ID, int age, String name, String state) {
 		this.ID = ID;
 		this.age = age;
@@ -29,9 +31,9 @@ public abstract class Participant {
 	public String getState() {
 		return state;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ID:" + ID + ", age:" + age + ", name:" + name + ", state:" + state;
+		return "ID:" + ID + ", Age:" + age + ", Name:" + name + ", State:" + state;
 	}
 }
