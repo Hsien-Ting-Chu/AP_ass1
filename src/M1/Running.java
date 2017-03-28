@@ -1,6 +1,8 @@
 package M1;
-
-// @Author : Hsienting Chu
+/**
+ * @author Hsienting Chu
+ *
+ */
 import java.util.List;
 
 import M2.Athlete;

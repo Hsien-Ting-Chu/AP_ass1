@@ -1,11 +1,13 @@
 package M1;
-
-// @Author : Hsienting Chu
+/**
+ * @author Hsienting Chu
+ *
+ */
 import java.util.*;
 import M2.*;
 
 public class Driver {
-	//Define all the Game type
+	// Define all the Game type
 	public static final String TYPE_SWIM = "swim";
 	public static final String TYPE_RUN = "run";
 	public static final String TYPE_CYCLE = "cycle";
@@ -16,18 +18,18 @@ public class Driver {
 	final int startup_menu_max = 6;
 	final int optionOne_menu_min = 0;
 	final int optionOne_menu_max = 4;
-	final int athletes_num_start = 0;
-	final int athletes_num_range = 8;
+	final int athletesNum_start = 0;
+	final int athletesNum_range = 8;
 	boolean end = false;
 
-	ArrayList<Athlete> athleteslist; 
+	ArrayList<Athlete> athleteslist;
 	ArrayList<Official> officialList;
 	ArrayList<Game> historyGames = new ArrayList<>();
-	
-	/* 1. Create 10 athletes in each type respectively, 
-	 and put them all in a the same ArryaList.
-	   2. Create 10 official 
-	*/
+
+	/*
+	 * 1. Create 10 athletes in each type respectively, and put them all in a
+	 * the same ArryaList. 2. Create 10 official
+	 */
 	public void initialisation() {
 
 		athleteslist = new ArrayList<>();
@@ -149,38 +151,92 @@ public class Driver {
 		return chooeseGame;
 	}
 
-	private void setGame() {
-//		int chooseGame = chooseGame();
-//		String gameID;
-//		int gameNum = 0;
-//		switch (chooseGame) {
-//		case 1:
-//			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
-//			Swimming swimming = new Swimming(gameID);
-//			gameNum++;
-//			break;
-//		case 2:
-//			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
-//			Cycling cycling = new Cycling(gameID);
-//			gameNum++;
-//			break;
-//		case 3:
-//			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
-//			Running running = new Running(gameID);
-//			gameNum++;
-//			break;
-//		}
+	private List<Athlete> generatePlayer(String gameType, int athleteNum) {
+		List<Athlete> returnList = new ArrayList<>();
+		while (returnList.size() < athleteNum) {
+			Athlete randomAthlete = athleteslist.get((int) (athletesNum_range * Math.random()));
+			switch (gameType) {
+			case TYPE_CYCLE:
+				if (randomAthlete instanceof Cyclist || randomAthlete instanceof SuperAthlete) {
+					if (!returnList.contains(randomAthlete)) {
+						returnList.add(randomAthlete);
+					}
+				}
+				break;
+			case TYPE_RUN:
+				if (randomAthlete instanceof Sprinter || randomAthlete instanceof SuperAthlete) {
+					if (!returnList.contains(randomAthlete)) {
+						returnList.add(randomAthlete);
+					}
+				}
+				break;
+			case TYPE_SWIM:
+				if (randomAthlete instanceof Swimmer || randomAthlete instanceof SuperAthlete) {
+					if (!returnList.contains(randomAthlete)) {
+						returnList.add(randomAthlete);
+					}
+				}
+				break;
+			}
+		}
+		return returnList;
 	}
 
-	private void chooseAthletes() {
-		Random r = new Random();
-		int athletesNum = r.nextInt(athletes_num_range) + athletes_num_start;
-		if (athletesNum < 4) {
-
-		} else if (athletesNum > 4) {
-
+	private void printHistoryGames() {
+		System.out.println("============= total games ==============");
+		for (int i = 0; i < historyGames.size(); i++) {
+			printGameResult(historyGames.get(i));
 		}
+	}
 
+	private void printAthelets() {
+		System.out.println("============= total athletes ==============");
+		for (int i = 0; i < athleteslist.size(); i++) {
+			printAthelet(athleteslist.get(i));
+		}
+	}
+
+	private void printSortAthelets() {
+		System.out.println("============= total rank ==============");
+		List<Athlete> sortList = sortAthelets(athleteslist);
+		for (int i = 0; i < sortList.size(); i++) {
+			printAthelet(sortList.get(i));
+		}
+	}
+
+	private List<Athlete> sortAthelets(List<Athlete> athelets) {
+		List<Athlete> sortList = new ArrayList<Athlete>(athelets);
+		Collections.sort(sortList, new Comparator<Athlete>() {
+			@Override
+			public int compare(Athlete a1, Athlete a2) {
+				return a2.getPoints() - a1.getPoints();
+			}
+		});
+		return sortList;
+	}
+
+	private void printAthelet(Athlete athlete) {
+		System.out.println(athlete.toString() + " || point:" + athlete.getPoints());
+	}
+
+	private void printGameResult(Game game) {
+		System.out.println("Game:" + game.getID() + " Type:" + game.getType());
+		if (game.isCancelled()) {
+			System.out.println("Game Canceled");
+		} else {
+			List<Participant> pList = game.getPrintResult();
+			for (int i = 0; i < pList.size(); i++) {
+				if (i == 0) {
+					printParticipant("referee", pList.get(i));
+				} else {
+					printParticipant("Rank " + i, pList.get(i));
+				}
+			}
+		}
+	}
+
+	private void printParticipant(String title, Participant participant) {
+		System.out.println(title + " " + participant.toString());
 	}
 
 	private void prediction() {
@@ -189,6 +245,28 @@ public class Driver {
 
 	private void startGame() {
 
+		Random r = new Random();
+		int athletesNum = r.nextInt(athletesNum_range) + athletesNum_start;
+		if (athletesNum < 4) {
+
+		} else if (athletesNum > 4) {
+
+		}
+
+		int chooseGame = chooseGame();
+		// String gameID;
+		// int gameNum = 0;
+		switch (chooseGame) {
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		}
 	}
 
 	private void displayReuslt() {
@@ -207,8 +285,6 @@ public class Driver {
 			case 1:
 				optionOne_menu();
 				chooseGame();
-				setGame();
-				chooseAthletes();
 				break;
 			case 2:
 				prediction();

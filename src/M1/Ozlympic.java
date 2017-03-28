@@ -1,6 +1,8 @@
 package M1;
-
-// @Author : Hsienting Chu
+/**
+ * @author Hsienting Chu
+ *
+ */
 public class Ozlympic {
 
 	public static void main(String[] args) {

@@ -1,6 +1,8 @@
 package M1;
-
-// @Author : Hsienting Chu
+/**
+ * @author Hsienting Chu
+ *
+ */
 import java.util.List;
 import M2.Athlete;
 import M2.Cyclist;
@@ -11,7 +13,7 @@ public class Cycling extends Game {
 
 	public Cycling(String ID, List<Athlete> athletes, Official referee) {
 		super(ID, Driver.TYPE_CYCLE, athletes, referee);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override

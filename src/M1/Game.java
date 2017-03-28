@@ -1,6 +1,8 @@
 package M1;
-
-// @author : Hsienting Chu
+/**
+ * @author Hsienting Chu
+ *
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +10,11 @@ import M2.Athlete;
 import M2.Official;
 import M2.Participant;
 
+
 public abstract class Game {
 
-	private static final int MAX_ACEPT = 8;
-	private static final int MIN_ACEPT = 4;
+//	private static final int MAX_ACEPT = 8;
+	private static final int athleteNum_min = 4;
 
 	private String ID;
 	private String type;
@@ -31,14 +34,14 @@ public abstract class Game {
 				athletes.remove(athletes);
 			}
 		}
-		if (athletes.size() < MIN_ACEPT) {
+		if (athletes.size() < athleteNum_min) {
 			cancelled = true;
 			return;
 		}
-		while (athletes.size() > MAX_ACEPT) {
-			athletes.remove((int) (athletes.size() * Math.random()));
-		}
-		this.athletes = athletes;
+//		while (athletes.size() > MAX_ACEPT) {
+//			athletes.remove((int) (athletes.size() * Math.random()));
+//		}
+//		this.athletes = athletes;
 	}
 
 	// Start game
