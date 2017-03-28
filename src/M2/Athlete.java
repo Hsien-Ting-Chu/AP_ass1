@@ -10,8 +10,8 @@ public abstract class Athlete extends Participant implements ICompetable {
 	@Override
 	public abstract int compete();
 	
-	//取得競爭者，通常就是自己
-	//多這個是為了讓有三個分身的SuperAthelet用
+	//To get the competer
+	//The extra one is used by superathlete
 	public ICompetable getCompeter(String gameType) {
 		return this;
 	}
