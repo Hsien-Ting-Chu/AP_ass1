@@ -3,13 +3,14 @@ package M2;
 import M1.Driver;
 
 public class SuperAthlete extends Athlete {
+
 	// Constructor
-	// 三個分身
+	// The superathletes that can attend three different kinds of games
 	private Swimmer swimmer;
 	private Sprinter sprinter;
 	private Cyclist cyclist;
 
-	//初始化的時候產生三個分身
+	// Create three superathlete while initiating
 	public SuperAthlete(String ID, int age, String name, String state) {
 		super(ID, age, name, state);
 		cyclist = new Cyclist(ID, age, name, state);
@@ -18,10 +19,11 @@ public class SuperAthlete extends Athlete {
 	}
 
 	public int compete() {
-		throw new RuntimeException("不能直接呼叫 SuperAthlete 的compete，請透過getCompeter的結果乎叫");
+		throw new RuntimeException(
+				"Cannot call the compete of SuperAthlete, please call it by the result of getCompeter");
 	}
 
-	//依照gameType回傳特定的競爭者
+	// Return to the right competer according to the game type
 	@Override
 	public ICompetable getCompeter(String gameType) {
 		switch (gameType) {
@@ -32,7 +34,6 @@ public class SuperAthlete extends Athlete {
 		case Driver.TYPE_CYCLE:
 			return cyclist;
 		}
-		throw new RuntimeException("岿粇gameType");
+		throw new RuntimeException("Wrong gameType");
 	}
 }
-//三個分身分數的總合
