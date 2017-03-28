@@ -4,12 +4,12 @@ import M1.Driver;
 
 public class SuperAthlete extends Athlete {
 	// Constructor
-	// だō
+	// 三個分身
 	private Swimmer swimmer;
 	private Sprinter sprinter;
 	private Cyclist cyclist;
 
-	// ﹍て玻ネだō
+	//初始化的時候產生三個分身
 	public SuperAthlete(String ID, int age, String name, String state) {
 		super(ID, age, name, state);
 		cyclist = new Cyclist(ID, age, name, state);
@@ -18,10 +18,10 @@ public class SuperAthlete extends Athlete {
 	}
 
 	public int compete() {
-		throw new RuntimeException("ぃ钡㊣ SuperAthlete compete叫硓筁getCompeter挡狦");
+		throw new RuntimeException("不能直接呼叫 SuperAthlete 的compete，請透過getCompeter的結果乎叫");
 	}
 
-	// ㄌ酚gameType肚疭﹚膙
+	//依照gameType回傳特定的競爭者
 	@Override
 	public ICompetable getCompeter(String gameType) {
 		switch (gameType) {
@@ -35,4 +35,4 @@ public class SuperAthlete extends Athlete {
 		throw new RuntimeException("岿粇gameType");
 	}
 }
-// だōだ计羆
+//三個分身分數的總合
