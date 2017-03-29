@@ -21,8 +21,8 @@ public class Driver {
 	final int optionOne_menu_max = 4;
 	final int athletesNum_range = 8;
 	boolean end = false;
-	public String gameID;
-	public String gameType;
+	public String gameID = "";
+	public String gameType = "";
 	public int gameNum = 0;
 	ArrayList<Athlete> athleteslist;
 	ArrayList<Official> officialList;
@@ -92,35 +92,20 @@ public class Driver {
 		officialList.add(new Official("OF10", 43, "Amber", "NSW"));
 	}
 
-	// printout a main menu
-	private void Startup_menu() {
-		System.out.println("Ozlympic Game");
-		System.out.println("===================================");
-		System.out.println("1. Select a game to run");
-		System.out.println("2. Predict the winner of the game");
-		System.out.println("3. Start the game");
-		System.out.println("4. Display the final results of all games");
-		System.out.println("5. Display the points of all athletes");
-		System.out.println("6. Exit");
-		System.out.print("Enter an option: ");
-
-	}
-
-	// printout a option 1 menu
-	private void optionOne_menu() {
-		System.out.println("Please choose a game");
-		System.out.println("1. Swimming");
-		System.out.println("2. Cycling");
-		System.out.println("3. Running");
-		System.out.print("Enter an option: ");
-	}
-
 	// Read user's choice of first menu
 	private int selection() {
 		boolean validInput = false;
 		int selection = 0; // initial selection
 		while (!validInput) {
-			Startup_menu();
+			System.out.println("Ozlympic Game");
+			System.out.println("===================================");
+			System.out.println("1. Select a game to run");
+			System.out.println("2. Predict the winner of the game");
+			System.out.println("3. Start the game");
+			System.out.println("4. Display the final results of all games");
+			System.out.println("5. Display the points of all athletes");
+			System.out.println("6. Exit");
+			System.out.print("Enter an option: ");
 			if (sc.hasNextInt()) {
 				selection = sc.nextInt();
 				if (startup_menu_min > selection || selection > startup_menu_max) {
@@ -140,7 +125,11 @@ public class Driver {
 		boolean validInput = false;
 		int chooseGame = 0; // initial gameType
 		while (!validInput) {
-			optionOne_menu();
+			System.out.println("Please choose a game type");
+			System.out.println("1. Swimming");
+			System.out.println("2. Cycling");
+			System.out.println("3. Running");
+			System.out.print("Enter an option: ");
 			if (sc.hasNextInt()) {
 				chooseGame = sc.nextInt();
 				if (optionOne_menu_min > chooseGame || chooseGame > optionOne_menu_max) {
@@ -153,7 +142,44 @@ public class Driver {
 				System.out.print("\n========Your input: " + sc.next() + " is invalid========\n\n");
 		}
 		return chooseGame;
+	}
 
+	private void startGame() {
+		int athleteNum = (int) (Math.random() * athletesNum_range);
+		
+		int chooseGame = chooseGame();
+		switch (chooseGame) {
+		case 1:
+			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
+			gameType = TYPE_SWIM;
+			List<Athlete> playerList = generatePlayer(gameType, athleteNum);
+			Game game_swin = new Swimming(gameID, playerList, generateOfficial());
+			game_swin.start();
+			historyGames.add(game_swin);
+			printGameResult(game_swin);
+			gameNum++;
+			break;
+		case 2:
+			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
+			gameType = TYPE_CYCLE;
+			playerList = generatePlayer(gameType, athleteNum);
+			Game game_cycle = new Cycling(gameID, playerList, generateOfficial());
+			game_cycle.start();
+			historyGames.add(game_cycle);
+			printGameResult(game_cycle);
+			gameNum++;
+			break;
+		case 3:
+			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
+			gameType = TYPE_RUN;
+			playerList = generatePlayer(gameType, athleteNum);
+			Game game_run = new Running(gameID, playerList, generateOfficial());
+			game_run.start();
+			historyGames.add(game_run);
+			printGameResult(game_run);
+			gameNum++;
+			break;
+		}
 	}
 
 	// Create player list depend on the chosen game type and random number of
@@ -193,34 +219,6 @@ public class Driver {
 
 	}
 
-	private void startGame() {
-		int athleteNum = (int) (Math.random() * athletesNum_range);
-		List<Athlete> playerList = generatePlayer(gameType, athleteNum);
-		int chooseGame = chooseGame();
-		switch (chooseGame) {
-		case 1:
-			gameType = TYPE_SWIM;
-			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
-			Game game_swin = new Swimming(gameID, playerList, generateOfficial());
-			game_swin.start();
-			gameNum++;
-			break;
-		case 2:
-			gameType = TYPE_CYCLE;
-			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
-			Game game_cycle = new Cycling(gameID, playerList, generateOfficial());
-			gameNum++;
-			break;
-		case 3:
-			gameType = TYPE_RUN;
-			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
-			Game game_run = new Running(gameID, playerList, generateOfficial());
-			gameNum++;
-			break;
-		}
-	}
-
-
 	private void printHistoryGames() {
 		System.out.println("============= The Final Results of All Games ==============");
 		for (int i = 0; i < historyGames.size(); i++) {
@@ -248,7 +246,7 @@ public class Driver {
 	}
 
 	private void printAthelet(Athlete athlete) {
-		System.out.println(" Point:" + athlete.getPoints() + athlete.toString());
+		System.out.println(" Point:" + athlete.getPoints() + " " + athlete.toString());
 	}
 
 	private void printGameResult(Game game) {
@@ -270,6 +268,7 @@ public class Driver {
 	private void printParticipant(String title, Participant participant) {
 		System.out.println(title + " " + participant.toString());
 	}
+
 	private Official generateOfficial() {
 		return officialList.get((int) (officialList.size() * Math.random()));
 	}
