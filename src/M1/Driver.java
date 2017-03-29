@@ -1,4 +1,5 @@
 package M1;
+
 /**
  * @author Hsienting Chu
  *
@@ -13,15 +14,16 @@ public class Driver {
 	public static final String TYPE_CYCLE = "cycle";
 	static Scanner sc = new Scanner(System.in);
 
-	// Define all option's range
+	// Define all option's range and random range
 	final int startup_menu_min = 0;
 	final int startup_menu_max = 6;
 	final int optionOne_menu_min = 0;
 	final int optionOne_menu_max = 4;
-	final int athletesNum_start = 0;
 	final int athletesNum_range = 8;
 	boolean end = false;
-
+	public String gameID;
+	public String gameType;
+	public int gameNum = 0;
 	ArrayList<Athlete> athleteslist;
 	ArrayList<Official> officialList;
 	ArrayList<Game> historyGames = new ArrayList<>();
@@ -113,6 +115,7 @@ public class Driver {
 		System.out.print("Enter an option: ");
 	}
 
+	// Read user's choice of first menu
 	private int selection() {
 		boolean validInput = false;
 		int selection = 0; // initial selection
@@ -132,29 +135,33 @@ public class Driver {
 		return selection;
 	}
 
+	// Read user's choice of game type
 	private int chooseGame() {
 		boolean validInput = false;
-		int chooeseGame = 0; // initial gameType
+		int chooseGame = 0; // initial gameType
 		while (!validInput) {
-			Startup_menu();
+			optionOne_menu();
 			if (sc.hasNextInt()) {
-				chooeseGame = sc.nextInt();
-				if (optionOne_menu_min > chooeseGame || chooeseGame > optionOne_menu_max) {
-					System.out.print("\n========Your input: " + chooeseGame + " is invalid========\n\n");
-					chooeseGame = 0; // initial gameType
+				chooseGame = sc.nextInt();
+				if (optionOne_menu_min > chooseGame || chooseGame > optionOne_menu_max) {
+					System.out.print("\n========Your input: " + chooseGame + " is invalid========\n\n");
+					chooseGame = 0; // initial gameType
 				} else {
 					validInput = true;
 				}
 			} else
 				System.out.print("\n========Your input: " + sc.next() + " is invalid========\n\n");
 		}
-		return chooeseGame;
+		return chooseGame;
+
 	}
 
+	// Create player list depend on the chosen game type and random number of
+	// player
 	private List<Athlete> generatePlayer(String gameType, int athleteNum) {
 		List<Athlete> returnList = new ArrayList<>();
 		while (returnList.size() < athleteNum) {
-			Athlete randomAthlete = athleteslist.get((int) (athletesNum_range * Math.random()));
+			Athlete randomAthlete = athleteslist.get(athleteNum);
 			switch (gameType) {
 			case TYPE_CYCLE:
 				if (randomAthlete instanceof Cyclist || randomAthlete instanceof SuperAthlete) {
@@ -182,22 +189,47 @@ public class Driver {
 		return returnList;
 	}
 
+	private void prediction() {
+
+	}
+
+	private void startGame() {
+		int athleteNum = (int) (Math.random() * athletesNum_range);
+		List<Athlete> playerList = generatePlayer(gameType, athleteNum);
+		int chooseGame = chooseGame();
+		switch (chooseGame) {
+		case 1:
+			gameType = TYPE_SWIM;
+			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
+			Game game_swin = new Swimming(gameID, playerList, generateOfficial());
+			game_swin.start();
+			gameNum++;
+			break;
+		case 2:
+			gameType = TYPE_CYCLE;
+			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
+			Game game_cycle = new Cycling(gameID, playerList, generateOfficial());
+			gameNum++;
+			break;
+		case 3:
+			gameType = TYPE_RUN;
+			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
+			Game game_run = new Running(gameID, playerList, generateOfficial());
+			gameNum++;
+			break;
+		}
+	}
+
+
 	private void printHistoryGames() {
-		System.out.println("============= total games ==============");
+		System.out.println("============= The Final Results of All Games ==============");
 		for (int i = 0; i < historyGames.size(); i++) {
 			printGameResult(historyGames.get(i));
 		}
 	}
 
-	private void printAthelets() {
-		System.out.println("============= total athletes ==============");
-		for (int i = 0; i < athleteslist.size(); i++) {
-			printAthelet(athleteslist.get(i));
-		}
-	}
-
 	private void printSortAthelets() {
-		System.out.println("============= total rank ==============");
+		System.out.println("============= The Points of All Athletes ==============");
 		List<Athlete> sortList = sortAthelets(athleteslist);
 		for (int i = 0; i < sortList.size(); i++) {
 			printAthelet(sortList.get(i));
@@ -216,20 +248,20 @@ public class Driver {
 	}
 
 	private void printAthelet(Athlete athlete) {
-		System.out.println(athlete.toString() + " || point:" + athlete.getPoints());
+		System.out.println(" Point:" + athlete.getPoints() + athlete.toString());
 	}
 
 	private void printGameResult(Game game) {
-		System.out.println("Game:" + game.getID() + " Type:" + game.getType());
+		System.out.println("Game: " + game.getID() + " Type: " + game.getType());
 		if (game.isCancelled()) {
-			System.out.println("Game Canceled");
+			System.out.println("Game Cancelled");
 		} else {
-			List<Participant> pList = game.getPrintResult();
-			for (int i = 0; i < pList.size(); i++) {
+			List<Participant> gameResult = game.getPrintResult();
+			for (int i = 0; i < gameResult.size(); i++) {
 				if (i == 0) {
-					printParticipant("referee", pList.get(i));
+					printParticipant("referee", gameResult.get(i));
 				} else {
-					printParticipant("Rank " + i, pList.get(i));
+					printParticipant("Rank " + i, gameResult.get(i));
 				}
 			}
 		}
@@ -238,43 +270,8 @@ public class Driver {
 	private void printParticipant(String title, Participant participant) {
 		System.out.println(title + " " + participant.toString());
 	}
-
-	private void prediction() {
-
-	}
-
-	private void startGame() {
-
-		Random r = new Random();
-		int athletesNum = r.nextInt(athletesNum_range) + athletesNum_start;
-		if (athletesNum < 4) {
-
-		} else if (athletesNum > 4) {
-
-		}
-
-		int chooseGame = chooseGame();
-		// String gameID;
-		// int gameNum = 0;
-		switch (chooseGame) {
-		case 1:
-
-			break;
-		case 2:
-
-			break;
-		case 3:
-
-			break;
-		}
-	}
-
-	private void displayReuslt() {
-
-	}
-
-	private void displayPoints() {
-
+	private Official generateOfficial() {
+		return officialList.get((int) (officialList.size() * Math.random()));
 	}
 
 	public void runGame() {
@@ -283,7 +280,6 @@ public class Driver {
 			int selection = selection();
 			switch (selection) {
 			case 1:
-				optionOne_menu();
 				chooseGame();
 				break;
 			case 2:
@@ -293,10 +289,10 @@ public class Driver {
 				startGame();
 				break;
 			case 4:
-				displayReuslt();
+				printHistoryGames();
 				break;
 			case 5:
-				displayPoints();
+				printSortAthelets();
 				break;
 			case 6:
 				end = true;
