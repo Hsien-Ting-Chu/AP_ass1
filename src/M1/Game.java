@@ -1,4 +1,5 @@
 package M1;
+
 /**
  * @author Hsienting Chu
  *
@@ -10,10 +11,8 @@ import M2.Athlete;
 import M2.Official;
 import M2.Participant;
 
-
 public abstract class Game {
 
-//	private static final int MAX_ACEPT = 8;
 	private static final int athleteNum_min = 4;
 
 	private String ID;
@@ -22,9 +21,9 @@ public abstract class Game {
 	private boolean cancelled = false;
 	private List<Athlete> athletes;
 	private List<Athlete> result;
-	
+
 	abstract protected boolean checkIsMatch(Athlete athlete);
-	
+
 	public Game(String ID, String type, List<Athlete> athletes, Official referee) {
 		this.ID = ID;
 		this.type = type;
@@ -35,27 +34,30 @@ public abstract class Game {
 			}
 		}
 		if (athletes.size() < athleteNum_min) {
+			System.out.println(athletes.size());
 			cancelled = true;
 			return;
 		}
-//		while (athletes.size() > MAX_ACEPT) {
-//			athletes.remove((int) (athletes.size() * Math.random()));
-//		}
-//		this.athletes = athletes;
+
 	}
 
 	// Start game
 	public void start() {
 		// Initialize referee from previous game
+		System.out.println("type = " + type);
 		referee.initNewGame();
+		System.out.println("init game");
 		for (Athlete athlete : athletes) {
-			// 將athlete，與取出競爭者去進行比賽
-			// 多了getCompeter的目的就是在SuperAthelet去將三個子athelet取出來並生出分數傳給裁判
+			System.out.println("init game");
+			// Call each athlete in athletes list to start the game
+			// getCompeter is to get the right type of superAthlete and produce right random seconds
 			referee.addScore(athlete, athlete.getCompeter(type).compete());
 		}
-		// 產生結果並加分
+		// To summarise score of top3 winner
+		System.out.println("summarise game");
 		referee.summarise();
-		// 將結果回傳
+		// Return the result 
+		System.out.println("result of game");
 		result = referee.getResult();
 	}
 

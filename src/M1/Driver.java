@@ -121,7 +121,7 @@ public class Driver {
 	}
 
 	// Read user's choice of game type
-	private int chooseGame() {
+	private void chooseGame() {
 		boolean validInput = false;
 		int chooseGame = 0; // initial gameType
 		while (!validInput) {
@@ -141,53 +141,59 @@ public class Driver {
 			} else
 				System.out.print("\n========Your input: " + sc.next() + " is invalid========\n\n");
 		}
-		return chooseGame;
-	}
-
-	private void startGame() {
-		int athleteNum = (int) (Math.random() * athletesNum_range);
-		
-		int chooseGame = chooseGame();
 		switch (chooseGame) {
 		case 1:
 			gameID = "S" + (gameNum < 10 ? "0" : "") + gameNum;
 			gameType = TYPE_SWIM;
-			List<Athlete> playerList = generatePlayer(gameType, athleteNum);
-			Game game_swin = new Swimming(gameID, playerList, generateOfficial());
-			game_swin.start();
-			historyGames.add(game_swin);
-			printGameResult(game_swin);
 			gameNum++;
 			break;
 		case 2:
 			gameID = "C" + (gameNum < 10 ? "0" : "") + gameNum;
 			gameType = TYPE_CYCLE;
-			playerList = generatePlayer(gameType, athleteNum);
-			Game game_cycle = new Cycling(gameID, playerList, generateOfficial());
-			game_cycle.start();
-			historyGames.add(game_cycle);
-			printGameResult(game_cycle);
 			gameNum++;
 			break;
 		case 3:
 			gameID = "R" + (gameNum < 10 ? "0" : "") + gameNum;
 			gameType = TYPE_RUN;
-			playerList = generatePlayer(gameType, athleteNum);
-			Game game_run = new Running(gameID, playerList, generateOfficial());
-			game_run.start();
-			historyGames.add(game_run);
-			printGameResult(game_run);
 			gameNum++;
 			break;
 		}
+		System.out.println("\nThis game type is " + gameType + "\n");
+	}
+
+	private void startGame() {
+		int athleteNum = (int) (Math.random() * athletesNum_range);
+		List<Athlete> playerList = generatePlayer(gameType, athleteNum);
+		Game game = null ;
+		switch (gameType) {
+		case TYPE_SWIM:
+			game= new Swimming(gameID, playerList, generateOfficial());
+			break;
+//		case TYPE_CYCLE:
+//			game= new Cycling(gameID, playerList, generateOfficial());
+//			break;
+//		case TYPE_RUN:
+//			game= new Running(gameID, playerList, generateOfficial());
+//			break;
+		}
+		System.out.println("athleteNum = " +athleteNum);
+		System.out.println("============= Player list ==============");
+		for (int i = 0; i < playerList.size(); i++) {
+			System.out.println(playerList.get(i));
+		}
+		game.start();
+		System.out.println("game finished");
+		historyGames.add(game);
+		printGameResult(game);
+		gameType="";
 	}
 
 	// Create player list depend on the chosen game type and random number of
-	// player
+
 	private List<Athlete> generatePlayer(String gameType, int athleteNum) {
 		List<Athlete> returnList = new ArrayList<>();
 		while (returnList.size() < athleteNum) {
-			Athlete randomAthlete = athleteslist.get(athleteNum);
+			Athlete randomAthlete = athleteslist.get((int) (athleteslist.size() * Math.random()));
 			switch (gameType) {
 			case TYPE_CYCLE:
 				if (randomAthlete instanceof Cyclist || randomAthlete instanceof SuperAthlete) {
@@ -216,6 +222,7 @@ public class Driver {
 	}
 
 	private void prediction() {
+
 
 	}
 
@@ -285,6 +292,9 @@ public class Driver {
 				prediction();
 				break;
 			case 3:
+				if(gameType.equals(""))
+					System.out.println("Please select a game type first !!\n");
+				else
 				startGame();
 				break;
 			case 4:
