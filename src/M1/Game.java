@@ -44,18 +44,16 @@ public abstract class Game {
 	// Start game
 	public void start() {
 		// Initialize referee from previous game
-		System.out.println("type = " + type);
 		referee.initNewGame();
-		System.out.println("init game");
-		for (Athlete athlete : athletes) {
-			System.out.println("init game");
-			// Call each athlete in athletes list to start the game
-			// getCompeter is to get the right type of superAthlete and produce right random seconds
-			referee.addScore(athlete, athlete.getCompeter(type).compete());
-		}
+		// Call each athlete in athletes list to start the game
+		// getCompeter is to get the right type of superAthlete and produce right random seconds
+		
+		//for (Athlete athlete : athletes) {
+			//referee.addScore(athlete, athlete.getCompeter(type).compete());
+		//}
 		// To summarise score of top3 winner
 		System.out.println("summarise game");
-		referee.summarise();
+		//referee.summarise();
 		// Return the result 
 		System.out.println("result of game");
 		result = referee.getResult();

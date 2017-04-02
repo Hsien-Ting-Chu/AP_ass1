@@ -162,19 +162,19 @@ public class Driver {
 	}
 
 	private void startGame() {
-		int athleteNum = (int) (Math.random() * athletesNum_range);
+		int athleteNum = (int) (Math.random() * athletesNum_range)+1;
 		List<Athlete> playerList = generatePlayer(gameType, athleteNum);
 		Game game = null ;
 		switch (gameType) {
 		case TYPE_SWIM:
 			game= new Swimming(gameID, playerList, generateOfficial());
 			break;
-//		case TYPE_CYCLE:
-//			game= new Cycling(gameID, playerList, generateOfficial());
-//			break;
-//		case TYPE_RUN:
-//			game= new Running(gameID, playerList, generateOfficial());
-//			break;
+		case TYPE_CYCLE:
+			game= new Cycling(gameID, playerList, generateOfficial());
+			break;
+		case TYPE_RUN:
+			game= new Running(gameID, playerList, generateOfficial());
+			break;
 		}
 		System.out.println("athleteNum = " +athleteNum);
 		System.out.println("============= Player list ==============");
