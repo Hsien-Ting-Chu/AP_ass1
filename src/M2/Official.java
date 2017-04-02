@@ -1,6 +1,6 @@
 package M2;
-
 //Class Author : Haifan Wang 
+
 import java.util.*;
 
 public class Official extends Participant {
