@@ -1,6 +1,6 @@
 package M2;
+//Class Author : Haifan Wang
 
-//Class Author : Haifan Wang 
 import java.util.Random;
 
 public class Sprinter extends Athlete implements ICompetable {

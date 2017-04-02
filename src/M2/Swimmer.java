@@ -1,6 +1,6 @@
 package M2;
-
 //Class Author : Haifan Wang 
+
 import java.util.Random;
 
 public class Swimmer extends Athlete implements ICompetable {

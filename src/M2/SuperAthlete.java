@@ -1,4 +1,5 @@
 package M2;
+//Class Author : Haifan Wang
 
 import M1.Driver;
 
@@ -10,7 +11,7 @@ public class SuperAthlete extends Athlete {
 	private Sprinter sprinter;
 	private Cyclist cyclist;
 
-	// Create three superathlete while initiating
+	// Create three kinds of athlete for superAthlete
 	public SuperAthlete(String ID, int age, String name, String state) {
 		super(ID, age, name, state);
 		cyclist = new Cyclist(ID, age, name, state);
@@ -20,7 +21,7 @@ public class SuperAthlete extends Athlete {
 
 	public int compete() {
 		throw new RuntimeException(
-				"Cannot call the compete of SuperAthlete, please call it by the result of getCompeter");
+				"You should call getCompeter() for superAthlete, superAthlete.compete is not available");
 	}
 
 	// Return to the right competer according to the game type
